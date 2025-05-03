@@ -1,0 +1,13 @@
+const AT = require('africastalking')({
+  apiKey: 'YOUR_API_KEY',
+  username: 'YOUR_USERNAME'
+});
+
+const sms = AT.SMS;
+
+function sendLessonSMS(phoneNumber, message) {
+  sms.send({
+    to: [phoneNumber],
+    message: message
+  }).then(console.log).catch(console.error);
+}
