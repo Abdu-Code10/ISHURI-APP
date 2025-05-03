@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Choose Subject</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Subjects</h2>
+  <ul id="subjects-list"></ul>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const level = urlParams.get('level');
+
+    fetch(`../api/get_subjects.php?level=${level}`)
+      .then(res => res.json())
+      .then(subjects => {
+        const list = document.getElementById('subjects-list');
+        subjects.forEach(sub => {
+          const li = document.createElement('li');
+          li.innerHTML = `<a href="lessons.html?level=${level}&subject=${sub}">${sub}</a>`;
+          list.appendChild(li);
+        });
+      });
+  </script>
+</body>
+</html>
