@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lessons</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Lessons</h2>
+  <ul id="lessons-list"></ul>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const level = urlParams.get('level');
+    const subject = urlParams.get('subject');
+
+    fetch(`../api/get_lessons.php?level=${level}&subject=${subject}`)
+      .then(res => res.json())
+      .then(lessons => {
+        const list = document.getElementById('lessons-list');
+        lessons.forEach(lesson => {
+          const li = document.createElement('li');
+          li.innerText = lesson.title;
+          list.appendChild(li);
+        });
+      });
+  </script>
+</body>
+</html>
